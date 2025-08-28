@@ -2,15 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-
-// Mock data for now, will be replaced with API call
-const mockCategories = [
-  { id: 1, name: 'Electronics' },
-  { id: 2, name: 'Books' },
-  { id: 3, name: 'Clothing' },
-  { id: 4, name: 'Home & Garden' },
-  { id: 5, name: 'Sports & Outdoors' },
-];
+import api from '@/lib/api';
 
 const mockBrands = ['Apple', 'Samsung', 'Nike', 'Adidas', 'Sony'];
 
@@ -22,9 +14,17 @@ export default function Sidebar({ onCategoryChange }) {
   const [isBrandOpen, setIsBrandOpen] = useState(true);
   const [isPriceOpen, setIsPriceOpen] = useState(true);
 
-  // In a real app, you'd fetch this data
   useEffect(() => {
-    setCategories(mockCategories);
+    const fetchCategories = async () => {
+      try {
+        const response = await api.get('/api/v1/categories');
+        setCategories(response);
+      } catch (error) {
+        console.error('Failed to fetch categories:', error);
+      }
+    };
+
+    fetchCategories();
     setBrands(mockBrands);
   }, []);
 

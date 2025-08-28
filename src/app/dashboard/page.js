@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
+import ProductGrid from '@/components/ProductGrid';
 
 export default function Dashboard() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -20,8 +21,7 @@ export default function Dashboard() {
         <Sidebar onCategoryChange={handleCategoryChange} />
         <main className="flex-1 p-4 md:p-8">
           <h1 className="text-2xl font-bold mb-4">Products</h1>
-          <p className="text-gray-700 dark:text-gray-300">Selected Category ID: {selectedCategory || 'All'}</p>
-          {/* ProductGrid will be placed here */}
+          <ProductGrid selectedCategory={selectedCategory} />
         </main>
       </div>
     </div>

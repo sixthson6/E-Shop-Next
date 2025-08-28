@@ -10,7 +10,7 @@ export async function POST(request) {
 
     const { accessToken, refreshToken } = response;
 
-    cookies().set('refreshToken', refreshToken, {
+    await cookies().set('refreshToken', refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV !== 'development',
       sameSite: 'strict',
